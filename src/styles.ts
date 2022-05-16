@@ -57,6 +57,12 @@ export const CommentScore = styled.span`
   span {
     // this helped me center the icon vertically!
     display: flex;
+    opacity: 0.5;
+    transition: opacity 0.4s ease-in-out;
+
+    :hover {
+      opacity: 1;
+    }
   }
 `;
 
@@ -64,8 +70,8 @@ export const CommentReply = styled.span`
   display: flex;
   padding: 1em;
   gap: 1em;
-  /* background-color: red; */
   cursor: pointer;
+  transition: opacity 0.4s ease-in-out;
   p {
     color: hsl(238, 40%, 52%);
     font-weight: 600;
@@ -73,6 +79,10 @@ export const CommentReply = styled.span`
   }
   span {
     display: flex;
+  }
+
+  :hover {
+    opacity: 0.5;
   }
 `;
 
