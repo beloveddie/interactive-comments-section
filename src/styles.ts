@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 export const AppContainer = styled.main`
   background-color: hsl(228, 33%, 97%);
   color: hsl(212, 24%, 26%);
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   gap: 1em;
@@ -77,12 +77,22 @@ export const CommentReply = styled.span`
     font-weight: 600;
     font-size: 1.2em;
   }
+
+  div {
+    display: flex;
+    gap: 1em;
+
+    :hover {
+      opacity: 0.5;
+    }
+  }
   span {
     display: flex;
-  }
+    justify-content: space-between;
 
-  :hover {
-    opacity: 0.5;
+    /* :hover {
+      opacity: 0.5;
+    } */
   }
 `;
 
@@ -90,4 +100,13 @@ export const CommentBottomWrapper = styled.span`
   display: flex;
   align-items: center;
   justify-content: space-between;
+`;
+
+export const ReplyContainer = styled.div`
+  border-left: 0.2em solid hsl(223, 19%, 93%);
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin-left: 1.5vw;
+  padding-left: 2.5vw;
 `;

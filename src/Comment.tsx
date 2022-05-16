@@ -6,41 +6,60 @@ import {
   CommentScore,
   CommentBottomWrapper,
 } from "./styles";
-import profileImg from "./images/avatars/image-amyrobson.png";
 import incrementIcon from "./images/icon-plus.svg";
 import decrementIcon from "./images/icon-minus.svg";
 import replyIcon from "./images/icon-reply.svg";
 
-// type definition to distinguish reply
+// type definition for comment
+type TImage = {
+  png: string;
+  webp: string;
+};
 
-export const Comment = () => {
+type TUser = {
+  image: TImage;
+  username: string;
+};
+
+type CommentProps = {
+  id: number;
+  content: string;
+  createdAt: string;
+  score: number;
+  user: TUser;
+  replies: any;
+};
+
+type TComment = {
+  comment: CommentProps;
+};
+
+export const Comment = ({ comment }: TComment) => {
   return (
     <CommentCard>
       <CommentHeader>
-        <img src={profileImg} alt="profile img" />
-        <h2>amyrobson</h2>
-        <p>1 month ago</p>
+        <img src={comment.user.image.webp} alt="profile img" />
+        <h2>{comment.user.username}</h2>
+        <p>{comment.createdAt}</p>
       </CommentHeader>
-      <CommentParagraph>
-        Impressive! Though it seems the drag feature could be improved. But
-        overall it looks incredible. You've nailed the design and the
-        responsiveness at various breakpoints works really well.
-      </CommentParagraph>
+      <CommentParagraph>{comment.content}</CommentParagraph>
       <CommentBottomWrapper>
         <CommentScore>
           <span role="button" tabIndex={0}>
             <img src={incrementIcon} alt="upvote" />
           </span>
-          <p>12</p>
+          <p>{comment.score}</p>
           <span role="button" tabIndex={0}>
             <img src={decrementIcon} alt="downvote" />
           </span>
         </CommentScore>
         <CommentReply>
-          <span>
-            <img src={replyIcon} alt="reply" />
-          </span>
-          <p>Reply</p>
+          <div>
+            <span>
+              <img src={replyIcon} alt="reply" />
+            </span>
+            <p>Reply</p>
+          </div>
         </CommentReply>
       </CommentBottomWrapper>
     </CommentCard>
