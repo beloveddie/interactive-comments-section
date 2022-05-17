@@ -5,6 +5,7 @@ import { AppContainer, ReplyContainer } from "./styles";
 import { Comment } from "./Comment";
 import { data } from "./data";
 import { Reply } from "./Reply";
+import { CommentBox } from "./CommentBox";
 
 function App() {
   const currentUser = data.currentUser;
@@ -36,6 +37,7 @@ function App() {
             </>
           );
         })}
+        <CommentBox />
       </AppContainer>
     </ThemeProvider>
   );

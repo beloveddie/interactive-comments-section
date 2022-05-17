@@ -110,3 +110,37 @@ export const ReplyContainer = styled.div`
   margin-left: 1.5vw;
   padding-left: 2.5vw;
 `;
+
+export const CommentBoxContainer = styled(CommentCard)`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const CommentInput = styled.textarea`
+  margin: 0.5em;
+  padding: 0.5em;
+  border-radius: 10px;
+  height: 100px;
+  width: 100%;
+  font-family: "Rubik", sans-serif;
+  font-size: 1em;
+  border: 1px solid hsl(212, 24%, 80%);
+  outline: none;
+  caret-color: hsl(238, 40%, 52%);
+  cursor: pointer;
+
+  ::placeholder {
+    padding-left: 0.5em;
+  }
+
+  :focus {
+    border: 0.1em solid hsl(238, 40%, 52%);
+  }
+`;
+
+export const CommentBottom = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1em;
+`;
