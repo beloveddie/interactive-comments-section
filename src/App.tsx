@@ -1,7 +1,12 @@
 import { ThemeProvider } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import { theme } from "./themes";
-import { AppContainer, ReplyContainer } from "./styles";
+import {
+  AppContainer,
+  EditReplyContainer,
+  EditReplyInput,
+  ReplyContainer,
+} from "./styles";
 import { Comment } from "./Comment";
 import { data } from "./data";
 import { Reply } from "./Reply";
@@ -33,6 +38,26 @@ function App() {
                       </>
                     );
                   })}
+                {/* EditReply Component */}
+                {/* <EditReplyContainer>
+                  <EditReplyInput
+                    defaultValue={
+                      "I couldn't agree more with this. Everything moves so fast and it always seems like everyone knows the newest library/framework. But the fundamentals are what stay constant."
+                    }
+                  />
+                  <span>
+                    <Button
+                      variant="contained"
+                      sx={{
+                        width: "9em",
+                        fontWeight: 700,
+                        padding: "1em",
+                      }}
+                    >
+                      Update
+                    </Button>
+                  </span>
+                </EditReplyContainer> */}
               </ReplyContainer>
             </>
           );

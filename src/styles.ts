@@ -118,7 +118,7 @@ export const CommentBoxContainer = styled(CommentCard)`
 
 export const CommentInput = styled.textarea`
   margin: 0.5em;
-  padding: 0.5em;
+  padding: 1em;
   border-radius: 10px;
   height: 100px;
   width: 100%;
@@ -144,3 +144,11 @@ export const CommentBottom = styled.div`
   align-items: center;
   margin-top: 1em;
 `;
+
+export const EditReplyContainer = styled(CommentBoxContainer)`
+  span {
+    align-self: flex-end;
+  }
+`;
+
+export const EditReplyInput = styled(CommentInput)``;

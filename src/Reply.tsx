@@ -12,6 +12,7 @@ import decrementIcon from "./images/icon-minus.svg";
 import replyIcon from "./images/icon-reply.svg";
 import editIcon from "./images/icon-edit.svg";
 import deleteIcon from "./images/icon-delete.svg";
+import { BasicModal } from "./DeleteModal";
 
 // type definition for comment
 type TImage = {
@@ -74,12 +75,7 @@ export const Reply = ({ reply, isCurrentUser }: TReply) => {
             </div>
           ) : (
             <>
-              <div>
-                <span>
-                  <img src={deleteIcon} alt="delete" />
-                </span>
-                <p>Delete</p>
-              </div>
+              <BasicModal />
 
               <div>
                 <span>

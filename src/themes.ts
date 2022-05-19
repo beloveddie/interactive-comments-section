@@ -1,5 +1,4 @@
 import { createTheme } from "@mui/material";
-import { green } from "@mui/material/colors";
 
 const primaryColors = {
     moderateBlue: "hsl(238, 40%, 52%)",
@@ -21,7 +20,10 @@ export const theme = createTheme({
       main: primaryColors["moderateBlue"],
     },
     secondary: {
-      main: green[500],
+      main: neutralColors["darkBlue"],
+    },
+    error: {
+      main: primaryColors["softRed"],
     },
   },
 });
