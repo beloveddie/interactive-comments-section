@@ -18,7 +18,9 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <AppContainer>
-        <Button variant="contained">GOD IS SO GOOD!</Button>
+        <Button variant="contained" sx={{ my: 3 }}>
+          GOD IS SO GOOD, SO AMAZING!
+        </Button>
         {comments.map((comment) => {
           return (
             <>

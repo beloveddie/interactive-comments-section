@@ -5,6 +5,7 @@ import {
   CommentReply,
   CommentScore,
   CommentBottomWrapper,
+  ResponsiveCommentCardWrapper,
 } from "./styles";
 import incrementIcon from "./images/icon-plus.svg";
 import decrementIcon from "./images/icon-minus.svg";
@@ -37,12 +38,14 @@ type TComment = {
 export const Comment = ({ comment }: TComment) => {
   return (
     <CommentCard>
-      <CommentHeader>
-        <img src={comment.user.image.webp} alt="profile img" />
-        <h2>{comment.user.username}</h2>
-        <p>{comment.createdAt}</p>
-      </CommentHeader>
-      <CommentParagraph>{comment.content}</CommentParagraph>
+      <ResponsiveCommentCardWrapper>
+        <CommentHeader>
+          <img src={comment.user.image.webp} alt="profile img" />
+          <h2>{comment.user.username}</h2>
+          <p>{comment.createdAt}</p>
+        </CommentHeader>
+        <CommentParagraph>{comment.content}</CommentParagraph>
+      </ResponsiveCommentCardWrapper>
       <CommentBottomWrapper>
         <CommentScore>
           <span role="button" tabIndex={0}>

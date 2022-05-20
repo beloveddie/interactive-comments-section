@@ -1,19 +1,28 @@
-import { CommentBottom, CommentBoxContainer, CommentInput } from "./styles";
+import {
+  CommentBottom,
+  CommentBoxContainer,
+  CommentInput,
+  CommentBottomImg,
+  CommentBottomButtonWrapper,
+  ResponsiveCommentInputWrapper,
+} from "./styles";
 import Button from "@mui/material/Button";
 
 export const CommentBox = () => {
   return (
     <CommentBoxContainer>
-      <CommentInput placeholder="Add a comment..." />
+      <ResponsiveCommentInputWrapper>
+        <CommentInput placeholder="Add a comment..." />
+      </ResponsiveCommentInputWrapper>
       <CommentBottom>
-        <span>
+        <CommentBottomImg>
           <img
             src="https://res.cloudinary.com/enthusiasm/image/upload/v1652708055/comment-users/image-juliusomo_rugxq2.png"
             alt="juliusomo"
           />
-        </span>
+        </CommentBottomImg>
 
-        <span>
+        <CommentBottomButtonWrapper>
           <Button
             variant="contained"
             sx={{
@@ -24,7 +33,7 @@ export const CommentBox = () => {
           >
             Send
           </Button>
-        </span>
+        </CommentBottomButtonWrapper>
       </CommentBottom>
     </CommentBoxContainer>
   );

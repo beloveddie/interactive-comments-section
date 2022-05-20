@@ -1,19 +1,31 @@
 import styled from "@emotion/styled";
 
 export const AppContainer = styled.main`
-  background-color: hsl(228, 33%, 97%);
   color: hsl(212, 24%, 26%);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  gap: 1em;
   font-size: 16px;
   padding: 0.3em;
-`;
 
+  @media screen and (min-width: 1440px) {
+    width: 50vw;
+    justify-content: center;
+    margin: 0 auto;
+  }
+`;
+export const ResponsiveCommentCardWrapper = styled.div`
+  @media screen and (min-width: 1440px) {
+    width: 80%;
+    padding-top: 0.5em;
+    margin: 0 auto;
+  }
+`;
 export const CommentCard = styled.div`
+  position: relative;
   background-color: hsl(0, 0%, 100%);
   padding: 10px;
+  margin-bottom: 1em;
   border-radius: 10px;
   min-height: 200px;
 `;
@@ -24,7 +36,7 @@ export const CommentHeader = styled.span`
   gap: 1em;
 
   h2 {
-    font-size: 1.4em;
+    font-size: 1em;
     font-weight: 700;
   }
 `;
@@ -48,6 +60,14 @@ export const CommentScore = styled.span`
   border-radius: 10px;
   cursor: pointer;
 
+  @media screen and (min-width: 1440px) {
+    position: absolute;
+    top: 0em;
+    flex-direction: column;
+    width: 3em;
+    padding-top: 1.4em;
+    padding-bottom: 1.4em;
+  }
   p {
     color: hsl(238, 40%, 52%);
     font-weight: 600;
@@ -75,13 +95,13 @@ export const CommentReply = styled.span`
   p {
     color: hsl(238, 40%, 52%);
     font-weight: 600;
-    font-size: 1.2em;
+    font-size: 1em;
   }
 
   div {
     display: flex;
-    gap: 1em;
-
+    gap: 0.8em;
+    margin-bottom: -1em;
     :hover {
       opacity: 0.5;
     }
@@ -89,10 +109,13 @@ export const CommentReply = styled.span`
   span {
     display: flex;
     justify-content: space-between;
+  }
 
-    /* :hover {
-      opacity: 0.5;
-    } */
+  @media screen and (min-width: 1440px) {
+    position: absolute;
+    top: 1em;
+    right: 0;
+    align-items: center;
   }
 `;
 
@@ -106,18 +129,18 @@ export const ReplyContainer = styled.div`
   border-left: 0.2em solid hsl(223, 19%, 93%);
   display: flex;
   flex-direction: column;
-  gap: 1em;
   margin-left: 1.5vw;
   padding-left: 2.5vw;
+  font-size: 1em;
 `;
 
 export const CommentBoxContainer = styled(CommentCard)`
   display: flex;
   flex-direction: column;
+  min-height: 100px;
 `;
 
 export const CommentInput = styled.textarea`
-  margin: 0.5em;
   padding: 1em;
   border-radius: 10px;
   height: 100px;
@@ -143,6 +166,33 @@ export const CommentBottom = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 1em;
+`;
+
+export const CommentBottomImg = styled.span`
+  @media screen and (min-width: 1440px) {
+    position: absolute;
+    top: 1em;
+  }
+`;
+
+export const CommentBottomButtonWrapper = styled.span`
+  @media screen and (min-width: 1440px) {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    /* width: 15%; */
+  }
+`;
+
+export const ResponsiveCommentInputWrapper = styled(
+  ResponsiveCommentCardWrapper
+)`
+  @media screen and (min-width: 1440px) {
+    width: 70%;
+    padding-top: 0.2em;
+    margin: 0 7em;
+    margin-left: 5em;
+  }
 `;
 
 export const EditReplyContainer = styled(CommentBoxContainer)`

@@ -8,6 +8,7 @@
 
 body {
   font-family: "Rubik", sans-serif;
+  background-color: hsl(228, 33%, 97%);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
