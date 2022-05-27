@@ -41,12 +41,15 @@ export const CommentHeader = styled.span`
   }
 `;
 
-export const CommentParagraph = styled.p`
+export const CommentParagraph = styled.div`
   font-weight: 1em;
-  font-size: 1em;
   margin-top: 1em;
   line-height: 1.4em;
-  color: hsl(211, 10%, 45%);
+
+  p {
+    font-size: 1em;
+    color: hsl(211, 10%, 45%);
+  }
 `;
 
 export const CommentScore = styled.span`
