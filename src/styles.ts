@@ -46,6 +46,7 @@ export const CommentParagraph = styled.p`
   font-size: 1em;
   margin-top: 1em;
   line-height: 1.4em;
+  color: hsl(211, 10%, 45%);
 `;
 
 export const CommentScore = styled.span`
