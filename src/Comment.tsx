@@ -43,9 +43,9 @@ export const Comment = ({ comment }: TComment) => {
           <img src={comment.user.image.webp} alt="profile img" />
           <h2>{comment.user.username}</h2>
           <p>{comment.createdAt}</p>
-          <p>{comment.content}</p>
         </CommentHeader>
-        <CommentParagraph>{/* <p>{comment.content}</p> */}</CommentParagraph>
+        <p>{comment.content}</p>
+        {/* <CommentParagraph></CommentParagraph> */}
       </ResponsiveCommentCardWrapper>
       <CommentBottomWrapper>
         <CommentScore>
