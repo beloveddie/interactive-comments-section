@@ -23,6 +23,8 @@ export const ResponsiveCommentCardWrapper = styled.div`
 `;
 export const CommentCard = styled.div`
   position: relative;
+  display: flex;
+  flex-direction: column;
   background-color: hsl(0, 0%, 100%);
   padding: 10px;
   margin-bottom: 1em;

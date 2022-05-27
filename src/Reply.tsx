@@ -55,9 +55,9 @@ export const Reply = ({ reply, isCurrentUser }: TReply) => {
           )}
           <p>{reply.createdAt}</p>
         </ReplyHeader>
-        {/* <ReplyParagraph> */}
-        <p>{reply.content}</p>
-        {/* </ReplyParagraph> */}
+        <ReplyParagraph>
+          <p>{reply.content}</p>
+        </ReplyParagraph>
       </ResponsiveReplyCardWrapper>
       <ReplyBottomWrapper>
         <ReplyScore>

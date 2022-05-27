@@ -14,7 +14,9 @@ export const InteractiveCommentSection = () => {
       {comments.map((comment) => {
         return (
           <React.Fragment key={nanoid()}>
-            <Comment comment={comment} />
+            <div>
+              <Comment comment={comment} />
+            </div>
             {comment.replies.length > 0 && (
               <ReplyContainer>
                 {comment.replies.map((reply) => {
