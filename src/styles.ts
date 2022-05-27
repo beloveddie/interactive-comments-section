@@ -130,6 +130,7 @@ export const ReplyContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 1.5vw;
+  margin-bottom: 1em;
   padding-left: 2.5vw;
   font-size: 1em;
 `;
@@ -180,7 +181,6 @@ export const CommentBottomButtonWrapper = styled.span`
     position: absolute;
     top: 1em;
     right: 1em;
-    /* width: 15%; */
   }
 `;
 
