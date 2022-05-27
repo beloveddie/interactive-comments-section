@@ -46,7 +46,7 @@ export const CommentParagraph = styled.div`
   margin-top: 1em;
   line-height: 1.4em;
   p {
-    font-size: 16px;
+    font-size: 1em;
     color: hsl(211, 10%, 45%);
   }
 `;
