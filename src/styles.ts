@@ -9,9 +9,9 @@ export const AppContainer = styled.main`
   padding: 0.3em;
 
   @media screen and (min-width: 1440px) {
-    width: 50vw;
+    max-width: 60em;
     justify-content: center;
-    margin: 0 auto;
+    margin: 2em auto;
   }
 `;
 export const ResponsiveCommentCardWrapper = styled.div`
@@ -43,6 +43,7 @@ export const CommentHeader = styled.span`
 
 export const CommentParagraph = styled.p`
   font-weight: 1em;
+  font-size: 1em;
   margin-top: 1em;
   line-height: 1.4em;
 `;
