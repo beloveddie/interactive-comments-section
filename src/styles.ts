@@ -45,14 +45,13 @@ export const CommentParagraph = styled.div`
   font-weight: 1em;
   margin-top: 1em;
   line-height: 1.4em;
-
   p {
     font-size: 1em;
     color: hsl(211, 10%, 45%);
   }
 `;
 
-export const CommentScore = styled.span`
+export const CommentScore = styled.div`
   display: flex;
   align-items: center;
   text-align: center;
@@ -63,7 +62,6 @@ export const CommentScore = styled.span`
   padding: 1em;
   background-color: hsl(223, 19%, 93%);
   border-radius: 10px;
-  cursor: pointer;
 
   @media screen and (min-width: 1440px) {
     position: absolute;
@@ -84,6 +82,7 @@ export const CommentScore = styled.span`
     display: flex;
     opacity: 0.5;
     transition: opacity 0.4s ease-in-out;
+    cursor: pointer;
 
     :hover {
       opacity: 1;
@@ -192,7 +191,7 @@ export const ResponsiveCommentInputWrapper = styled(
   ResponsiveCommentCardWrapper
 )`
   @media screen and (min-width: 1440px) {
-    width: 70%;
+    max-width: 75%;
     padding-top: 0.2em;
     margin: 0 7em;
     margin-left: 5em;
