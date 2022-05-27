@@ -137,7 +137,6 @@ export const ReplyContainer = styled.div`
   margin-left: 1.5vw;
   margin-bottom: 1em;
   padding-left: 2.5vw;
-  font-size: 1em;
 `;
 
 export const CommentBoxContainer = styled(CommentCard)`
