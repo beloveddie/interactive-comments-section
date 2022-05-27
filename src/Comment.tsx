@@ -45,9 +45,7 @@ export const Comment = ({ comment }: TComment) => {
           <p>{comment.createdAt}</p>
           <p>{comment.content}</p>
         </CommentHeader>
-        <CommentParagraph>
-          <p>{comment.content}</p>
-        </CommentParagraph>
+        <CommentParagraph>{/* <p>{comment.content}</p> */}</CommentParagraph>
       </ResponsiveCommentCardWrapper>
       <CommentBottomWrapper>
         <CommentScore>
