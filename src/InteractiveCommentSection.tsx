@@ -1,14 +1,20 @@
 import { EditReplyContainer, EditReplyInput, ReplyContainer } from "./styles";
-import { Comment } from "./Comment";
 import { data } from "./data";
 import { Reply } from "./Reply";
 import { CommentBox } from "./CommentBox";
-import React from "react";
+import React, { FunctionComponent, useReducer } from "react";
 import { nanoid } from "nanoid";
+import { Comment } from "./Comment";
+import { commentReducer } from "./utils/reducer";
 
-export const InteractiveCommentSection = () => {
-  const currentUser = data.currentUser;
-  const comments = data.comments;
+const currentUser = data.currentUser;
+const comments = data.comments;
+
+const initialState = { value: comments };
+
+export const InteractiveCommentSection: FunctionComponent = () => {
+  const [state, dispatch] = useReducer(commentReducer, initialState);
+
   return (
     <>
       {comments.map((comment) => {

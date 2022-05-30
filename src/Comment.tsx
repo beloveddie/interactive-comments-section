@@ -22,16 +22,16 @@ type TUser = {
   username: string;
 };
 
-type CommentProps = {
+export type CommentProps = {
   id: number;
   content: string;
   createdAt: string;
   score: number;
   user: TUser;
-  replies: any;
+  replies: any | any[];
 };
 
-type TComment = {
+export type TComment = {
   comment: CommentProps;
 };
 
