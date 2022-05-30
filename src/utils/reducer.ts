@@ -1,13 +1,14 @@
 import { CommentProps } from "../Comment";
 
 // an enum with the types of actions to use in our reducer
-enum CommentActionKind {
+export enum CommentActionKind {
   UPVOTE = "UPVOTE",
   DOWNVOTE = "DOWNVOTE",
+  REPLY = "REPLY",
 }
 
 // an interface for our actions
-interface CommentAction {
+export interface CommentAction {
   type: CommentActionKind;
   payload?: { commentID: number; voter: string };
 }
@@ -30,7 +31,9 @@ export function commentReducer(
     case CommentActionKind.DOWNVOTE:
       console.log("downvoted");
       return state;
-
+    case CommentActionKind.REPLY:
+      console.log("replied");
+      return state;
     default:
       console.log("nothing sup!");
       return state;

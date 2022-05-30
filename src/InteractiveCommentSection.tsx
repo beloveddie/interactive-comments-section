@@ -1,4 +1,4 @@
-import { EditReplyContainer, EditReplyInput, ReplyContainer } from "./styles";
+import { ReplyContainer } from "./styles";
 import { data } from "./data";
 import { Reply } from "./Reply";
 import { CommentBox } from "./CommentBox";
@@ -17,15 +17,15 @@ export const InteractiveCommentSection: FunctionComponent = () => {
 
   return (
     <>
-      {comments.map((comment) => {
+      {state.value.map((comment) => {
         return (
           <React.Fragment key={nanoid()}>
             <div>
-              <Comment comment={comment} />
+              <Comment comment={comment} dispatch={dispatch} />
             </div>
             {comment.replies.length > 0 && (
               <ReplyContainer>
-                {comment.replies.map((reply) => {
+                {comment.replies.map((reply: any) => {
                   return (
                     <Reply
                       key={nanoid()}

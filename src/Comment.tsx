@@ -10,6 +10,7 @@ import {
 import incrementIcon from "./images/icon-plus.svg";
 import decrementIcon from "./images/icon-minus.svg";
 import replyIcon from "./images/icon-reply.svg";
+import { CommentAction, CommentActionKind } from "./utils/reducer";
 
 // type definition for comment
 type TImage = {
@@ -33,9 +34,10 @@ export type CommentProps = {
 
 export type TComment = {
   comment: CommentProps;
+  dispatch: ({ type, payload }: CommentAction) => void;
 };
 
-export const Comment = ({ comment }: TComment) => {
+export const Comment = ({ comment, dispatch }: TComment) => {
   return (
     <CommentCard>
       <ResponsiveCommentCardWrapper>
@@ -50,16 +52,32 @@ export const Comment = ({ comment }: TComment) => {
       </ResponsiveCommentCardWrapper>
       <CommentBottomWrapper>
         <CommentScore>
-          <span role="button" tabIndex={0}>
+          <span
+            role="button"
+            tabIndex={0}
+            onClick={() =>
+              dispatch({
+                type: CommentActionKind.UPVOTE,
+                payload: {
+                  commentID: comment.id,
+                  voter: comment.user.username,
+                },
+              })
+            }
+          >
             <img src={incrementIcon} alt="upvote" />
           </span>
           <p>{comment.score}</p>
-          <span role="button" tabIndex={0}>
+          <span
+            role="button"
+            tabIndex={0}
+            onClick={() => dispatch({ type: CommentActionKind.DOWNVOTE })}
+          >
             <img src={decrementIcon} alt="downvote" />
           </span>
         </CommentScore>
         <CommentReply>
-          <div>
+          <div onClick={() => dispatch({ type: CommentActionKind.REPLY })}>
             <span>
               <img src={replyIcon} alt="reply" />
             </span>
