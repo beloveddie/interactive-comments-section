@@ -8,11 +8,11 @@ import {
   CommentBottomWrapper as ReplyBottomWrapper,
   ResponsiveCommentCardWrapper as ResponsiveReplyCardWrapper,
 } from "./styles";
-import incrementIcon from "./images/icon-plus.svg";
-import decrementIcon from "./images/icon-minus.svg";
 import replyIcon from "./images/icon-reply.svg";
 import editIcon from "./images/icon-edit.svg";
 import { BasicModal } from "./DeleteModal";
+import decrementIcon from "./images/icon-minus.svg";
+import incrementIcon from "./images/icon-plus.svg";
 
 // type definition for comment
 type TImage = {
@@ -61,12 +61,16 @@ export const Reply = ({ reply, isCurrentUser }: TReply) => {
       </ResponsiveReplyCardWrapper>
       <ReplyBottomWrapper>
         <ReplyScore>
-          <span role="button" tabIndex={0}>
-            <img src={incrementIcon} alt="upvote" />
+          <span>
+            <button tabIndex={0}>
+              <img src={incrementIcon} alt="upvote button" />
+            </button>
           </span>
           <p>{reply.score}</p>
-          <span role="button" tabIndex={0}>
-            <img src={decrementIcon} alt="downvote" />
+          <span>
+            <button tabIndex={0}>
+              <img src={decrementIcon} alt="downvote button" />
+            </button>
           </span>
         </ReplyScore>
         <ReplyReply>

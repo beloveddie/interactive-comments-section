@@ -1,4 +1,5 @@
-import { CommentProps } from "../Comment";
+import { CommentProps, TUser } from "../Comment";
+import { reply, TContent, vote } from "./commentReducerActions";
 
 // an enum with the types of actions to use in our reducer
 export enum CommentActionKind {
@@ -10,7 +11,12 @@ export enum CommentActionKind {
 // an interface for our actions
 export interface CommentAction {
   type: CommentActionKind;
-  payload?: { commentID: number; voter: string };
+  payload: {
+    commentID?: number;
+    user?: TUser;
+    content?: TContent;
+    replyingTo?: TUser;
+  };
 }
 
 // an interface for our state
@@ -23,19 +29,23 @@ export function commentReducer(
   state: CommentState,
   action: CommentAction
 ): CommentState {
-  const { type, payload } = action;
+  const {
+    type,
+    payload: { commentID, user, content, replyingTo },
+  } = action;
   switch (type) {
     case CommentActionKind.UPVOTE:
-      console.log("upvoted");
-      return state;
+      return vote(commentID!, state, "upvote");
     case CommentActionKind.DOWNVOTE:
-      console.log("downvoted");
-      return state;
+      return vote(commentID!, state, "downvote");
     case CommentActionKind.REPLY:
-      console.log("replied");
-      return state;
+      return reply(commentID!, user!, state, "comment", content!, replyingTo!);
     default:
       console.log("nothing sup!");
       return state;
   }
 }
+
+// export function replyReducer() {
+
+// }
