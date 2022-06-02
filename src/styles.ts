@@ -73,17 +73,22 @@ export const CommentScore = styled.div`
     padding-top: 1.4em;
     padding-bottom: 1.4em;
   }
+
   p {
     color: hsl(238, 40%, 52%);
     font-weight: 600;
     font-size: 1.2em;
   }
 
-  span {
-    // this helped me center the icon vertically!
+  button {
     display: flex;
-    opacity: 0.5;
+    align-items: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    border: none;
+    opacity: 0.8;
     transition: opacity 0.4s ease-in-out;
+    color: hsl(238, 40%, 52%);
     cursor: pointer;
 
     :hover {
