@@ -5,6 +5,9 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import deleteIcon from "./images/icon-delete.svg";
+import { ReducerContext } from "./InteractiveCommentSection";
+import { CommentActionKind } from "./utils/reducer";
+import { CommentProps, TReply } from "./Comment";
 
 const style = {
   position: "absolute" as "absolute",
@@ -17,11 +20,37 @@ const style = {
   border: "2px solid hsl(212, 24%, 26%)",
   boxShadow: 24,
   borderRadius: "1em",
-  //   mx: 4,
   p: 4,
 };
 
-export const BasicModal = () => {
+type DeleteActionKind = "comment" | "reply";
+type BasicModalProps = {
+  DeleteActionKind: DeleteActionKind;
+  comment?: CommentProps;
+  reply?: TReply;
+};
+
+export const BasicModal = ({
+  DeleteActionKind,
+  reply,
+  comment,
+}: BasicModalProps) => {
+  const { dispatch } = React.useContext(ReducerContext);
+
+  const handleDeleteReply = () => {
+    return {
+      type: CommentActionKind.DELETE_REPLY,
+      payload: { replyID: reply?.id, commentID: comment?.id },
+    };
+  };
+
+  const handleDeleteComment = () => {
+    return {
+      type: CommentActionKind.DELETE_COMMENT,
+      payload: { commentID: comment?.id, replyID: reply?.id },
+    };
+  };
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -54,10 +83,20 @@ export const BasicModal = () => {
             comment and can't be undone.
           </Typography>
           <Stack spacing={2} direction="row" sx={{ mt: 2 }}>
-            <Button variant="contained" color="secondary">
+            <Button variant="contained" color="secondary" onClick={handleClose}>
               No, Cancel
             </Button>
-            <Button variant="contained" color="error">
+            <Button
+              variant="contained"
+              color="error"
+              onClick={() => {
+                DeleteActionKind === "comment"
+                  ? dispatch(handleDeleteComment())
+                  : dispatch(handleDeleteReply());
+
+                // handleClose();
+              }}
+            >
               Yes, Delete
             </Button>
           </Stack>

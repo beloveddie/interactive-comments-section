@@ -8,21 +8,29 @@ type ReplyKind = "comment" | "reply";
 
 export type TContent = { text: string; date?: Date };
 
-export const commentVote = (
+export const replyVote = (
   commentId: number | string,
   state: CommentState,
-  voteAction: VoteAction
+  voteAction: VoteAction,
+  replyId?: number | string
 ) => {
   // get the comment with the given id.
   const newState = state.value.map((comment) => {
-    let score: number;
     if (comment.id === commentId) {
-      if (voteAction === "downvote") {
-        score = comment.score - 1;
-      } else {
-        score = comment.score + 1;
-      }
-      return { ...comment, score };
+      const replies = comment.replies.map((reply) => {
+        if (reply.id === replyId) {
+          let score: number;
+          if (voteAction === "downvote") {
+            score = reply.score - 1;
+          } else {
+            score = reply.score + 1;
+          }
+          return { ...reply, score };
+        } else {
+          return reply;
+        }
+      });
+      return { ...comment, replies };
     } else {
       return comment;
     }
@@ -31,7 +39,7 @@ export const commentVote = (
   return { value: newState };
 };
 
-export const replyComment = (
+export const reply = (
   id: number | string,
   user: TUser,
   state: CommentState,
@@ -62,45 +70,43 @@ export const replyComment = (
   return { value: newState };
 };
 
-export const sendComment = (
-  user: TUser,
-  content: TContent,
-  state: CommentState
-) => {
-  const newState = [
-    ...state.value,
-    {
-      id: nanoid(),
-      content: content.text,
-      createdAt: content.date!.toDateString(),
-      score: 0,
-      user,
-      replies: [],
-    },
-  ];
-
-  return { value: newState };
-};
-
-export const editComment = (
-  content: TContent,
+export const editReply = (
   commentId: number | string,
+  replyId: number | string,
+  content: TContent,
   state: CommentState
 ) => {
   const newState = state.value.map((comment) => {
     if (comment.id === commentId) {
-      return { ...comment, content: content.text };
+      const replies = comment.replies.map((reply) => {
+        if (reply.id === replyId) {
+          return { ...reply, content: content.text };
+        } else {
+          return reply;
+        }
+      });
+      return { ...comment, replies };
     } else {
       return comment;
     }
   });
+
   return { value: newState };
 };
 
-export const deleteComment = (
+export const deleteReply = (
   commentId: number | string,
+  replyId: number | string,
   state: CommentState
 ) => {
-  const newState = state.value.filter((comment) => comment.id !== commentId);
+  const newState = state.value.map((comment) => {
+    if (comment.id === commentId) {
+      const replies = comment.replies.filter((reply) => reply.id !== replyId);
+      return { ...comment, replies };
+    } else {
+      return comment;
+    }
+  });
+  // console.log(newState);
   return { value: newState };
 };

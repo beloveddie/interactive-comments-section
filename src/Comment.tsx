@@ -1,3 +1,4 @@
+import { useContext, useState } from "react";
 import {
   CommentCard,
   CommentHeader,
@@ -6,14 +7,18 @@ import {
   CommentScore,
   CommentBottomWrapper,
   ResponsiveCommentCardWrapper,
+  EditReplyContainer,
+  EditReplyInput,
 } from "./styles";
 import replyIcon from "./images/icon-reply.svg";
-import { CommentAction, CommentActionKind } from "./utils/reducer";
+import editIcon from "./images/icon-edit.svg";
 import decrementIcon from "./images/icon-minus.svg";
 import incrementIcon from "./images/icon-plus.svg";
-import { useState } from "react";
-
+import { CommentAction, CommentActionKind } from "./utils/reducer";
 import { CommentBox } from "./CommentBox";
+import { ReducerContext } from "./InteractiveCommentSection";
+import { BasicModal } from "./DeleteModal";
+import { Button } from "@mui/material";
 
 // type definition for comment
 export type TImage = {
@@ -36,12 +41,12 @@ export type TUser = {
 };
 
 export type CommentProps = {
-  id: number;
+  id: number | string;
   content: string;
   createdAt: string;
   score: number;
   user: TUser;
-  replies: TReply[];
+  replies: TReply[] | [];
 };
 
 export type TComment = {
@@ -50,7 +55,10 @@ export type TComment = {
 };
 
 export const Comment = ({ comment, dispatch }: TComment) => {
+  // we get the current user from
+  const { currentUser, setShowEdit, showEdit } = useContext(ReducerContext);
   const [showReply, setShowReply] = useState(false);
+  const [editContent, setEditContent] = useState(comment.content);
   return (
     <>
       <CommentCard>
@@ -61,18 +69,42 @@ export const Comment = ({ comment, dispatch }: TComment) => {
             <p>{comment.createdAt}</p>
           </CommentHeader>
           <CommentParagraph>
-            <p>{comment.content}</p>
+            {!showEdit ? (
+              <p>{comment.content}</p>
+            ) : (
+              <EditReplyContainer>
+                <EditReplyInput
+                  autoFocus
+                  value={editContent}
+                  onChange={(e) => setEditContent(e.target.value)}
+                />
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    dispatch({
+                      type: CommentActionKind.EDIT_COMMENT,
+                      payload: {
+                        commentID: comment.id,
+                        content: { text: editContent },
+                      },
+                    });
+                    setShowEdit(false);
+                  }}
+                >
+                  Update
+                </Button>
+              </EditReplyContainer>
+            )}
           </CommentParagraph>
         </ResponsiveCommentCardWrapper>
         <CommentBottomWrapper>
           <CommentScore>
             <span>
               <button
-                // type="button"
                 tabIndex={0}
                 onClick={() =>
                   dispatch({
-                    type: CommentActionKind.UPVOTE,
+                    type: CommentActionKind.UPVOTE_COMMENT,
                     payload: {
                       commentID: comment.id,
                       user: comment.user,
@@ -90,7 +122,7 @@ export const Comment = ({ comment, dispatch }: TComment) => {
                 disabled={!comment.score as unknown as boolean}
                 onClick={() =>
                   dispatch({
-                    type: CommentActionKind.DOWNVOTE,
+                    type: CommentActionKind.DOWNVOTE_COMMENT,
                     payload: {
                       commentID: comment.id,
                       user: comment.user,
@@ -107,12 +139,30 @@ export const Comment = ({ comment, dispatch }: TComment) => {
               onClick={() => {
                 setShowReply(!showReply);
               }}
+              tabIndex={0}
             >
               <span>
                 <img src={replyIcon} alt="reply" />
               </span>
               <p>{showReply ? "Cancel" : "Reply"}</p>
             </div>
+            {currentUser.username === comment.user.username && (
+              <>
+                <span className="dualBtn">
+                  <button>
+                    <BasicModal DeleteActionKind="comment" comment={comment} />
+                  </button>
+                  <button>
+                    <div onClick={() => setShowEdit(!showEdit)}>
+                      <span>
+                        <img src={editIcon} alt="edit" />
+                      </span>
+                      <p>{!showEdit ? "Edit" : "Cancel"}</p>
+                    </div>
+                  </button>
+                </span>
+              </>
+            )}
           </CommentReply>
         </CommentBottomWrapper>
       </CommentCard>

@@ -7,23 +7,36 @@ import {
   ResponsiveCommentInputWrapper,
 } from "./styles";
 import Button from "@mui/material/Button";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { ReducerContext } from "./InteractiveCommentSection";
 import { CommentActionKind } from "./utils/reducer";
 import { TUser } from "./Comment";
 
-type CommentBoxAction = "comment" | "reply";
+type CommentBoxAction = "comment" | "reply" | "replyToReply";
 
 type CommentBoxProps = {
   action: CommentBoxAction;
-  commentID?: number;
+  commentID?: number | string;
   user?: TUser;
+  userReplyingTo?: string;
 };
 
-export const CommentBox = ({ action, commentID, user }: CommentBoxProps) => {
+export const CommentBox = ({
+  action,
+  commentID,
+  user,
+  userReplyingTo,
+}: CommentBoxProps) => {
   const { dispatch, currentUser } = useContext(ReducerContext);
 
   const [content, setContent] = useState("");
+
+  useEffect(() => {
+    if (action === "replyToReply") {
+      setContent(`@${userReplyingTo}`);
+    }
+  }, [action, userReplyingTo]);
+
   return (
     <>
       <CommentBoxContainer>
@@ -47,27 +60,50 @@ export const CommentBox = ({ action, commentID, user }: CommentBoxProps) => {
           </CommentBottomImg>
 
           <CommentBottomButtonWrapper>
-            <Button
-              variant="contained"
-              sx={{
-                width: "9em",
-                fontWeight: 700,
-                padding: "1em",
-              }}
-              onClick={() =>
-                dispatch({
-                  type: CommentActionKind.REPLY,
-                  payload: {
-                    commentID,
-                    user: currentUser,
-                    replyingTo: user,
-                    content: { text: content, date: new Date() },
-                  },
-                })
-              }
-            >
-              {action === "comment" ? "Send" : "Reply"}
-            </Button>
+            {action === "comment" ? (
+              <Button
+                variant="contained"
+                sx={{
+                  width: "7em",
+                  fontWeight: 700,
+                  padding: "1em",
+                }}
+                onClick={() => {
+                  dispatch({
+                    type: CommentActionKind.COMMENT,
+                    payload: {
+                      content: { text: content, date: new Date() },
+                      user: currentUser,
+                    },
+                  });
+                  setContent("");
+                }}
+              >
+                Send
+              </Button>
+            ) : (
+              <Button
+                variant="contained"
+                sx={{
+                  width: "7em",
+                  fontWeight: 700,
+                  padding: "1em",
+                }}
+                onClick={() =>
+                  dispatch({
+                    type: CommentActionKind.REPLY_COMMENT,
+                    payload: {
+                      commentID,
+                      user: currentUser,
+                      replyingTo: user,
+                      content: { text: content, date: new Date() },
+                    },
+                  })
+                }
+              >
+                Reply
+              </Button>
+            )}
           </CommentBottomButtonWrapper>
         </CommentBottom>
       </CommentBoxContainer>

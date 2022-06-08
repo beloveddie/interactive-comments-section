@@ -1,4 +1,11 @@
-import React, { FunctionComponent, useReducer, createContext } from "react";
+import React, {
+  FunctionComponent,
+  useReducer,
+  createContext,
+  useState,
+  SetStateAction,
+  Dispatch,
+} from "react";
 import { ReplyContainer } from "./styles";
 import { data } from "./data";
 import { Reply } from "./Reply";
@@ -17,16 +24,21 @@ type TReducerContext = {
   state: CommentState;
   dispatch: ({ type, payload }: CommentAction) => void;
   currentUser: TUser;
+  showEdit: boolean;
+  setShowEdit: Dispatch<SetStateAction<boolean>>;
 };
 
 // // create context for Reducer
 export const ReducerContext = createContext({} as TReducerContext);
 
 export const InteractiveCommentSection: FunctionComponent = () => {
+  const [showEdit, setShowEdit] = useState(false);
   const [state, dispatch] = useReducer(commentReducer, initialState);
 
   return (
-    <ReducerContext.Provider value={{ state, dispatch, currentUser }}>
+    <ReducerContext.Provider
+      value={{ state, dispatch, currentUser, showEdit, setShowEdit }}
+    >
       {state.value.map((comment) => {
         return (
           <React.Fragment key={nanoid()}>
@@ -40,6 +52,7 @@ export const InteractiveCommentSection: FunctionComponent = () => {
                     <Reply
                       key={nanoid()}
                       reply={reply}
+                      comment={comment}
                       isCurrentUser={
                         currentUser.username === reply.user.username
                       }
