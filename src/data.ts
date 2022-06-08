@@ -1,8 +1,8 @@
 export const data = {
   currentUser: {
     image: {
-      png: "./images/avatars/image-juliusomo.png",
-      webp: "./images/avatars/image-juliusomo.webp",
+      png: "https://res.cloudinary.com/enthusiasm/image/upload/v1652708055/comment-users/image-juliusomo_rugxq2.png",
+      webp: "https://res.cloudinary.com/enthusiasm/image/upload/v1652708055/comment-users/image-juliusomo_sgbivz.webp",
     },
     username: "juliusomo",
   },
