@@ -44,6 +44,7 @@ export const CommentHeader = styled.span`
 `;
 
 export const CommentParagraph = styled.div`
+  position: relative;
   font-weight: 1em;
   margin-top: 1em;
   line-height: 1.4em;
@@ -117,9 +118,18 @@ export const CommentReply = styled.span`
       opacity: 0.5;
     }
   }
-  span {
+  span.dualBtn {
+    width: 100%;
     display: flex;
-    justify-content: space-between;
+    gap: 1.3em;
+
+    button {
+      background-color: transparent;
+      border: none;
+      display: flex;
+      font-size: 1em;
+      cursor: pointer;
+    }
   }
 
   @media screen and (min-width: 1440px) {
@@ -143,6 +153,12 @@ export const ReplyContainer = styled.div`
   margin-left: 1.5vw;
   margin-bottom: 1em;
   padding-left: 2.5vw;
+
+  @media screen and (min-width: 1440px) {
+    margin-left: 1.5em;
+    margin-bottom: 1em;
+    padding-left: 2.5em;
+  }
 `;
 
 export const CommentBoxContainer = styled(CommentCard)`
@@ -159,6 +175,7 @@ export const CommentInput = styled.textarea`
   font-family: "Rubik", sans-serif;
   font-size: 1em;
   border: 1px solid hsl(212, 24%, 80%);
+  color: hsl(211, 10%, 45%);
   outline: none;
   caret-color: hsl(238, 40%, 52%);
   cursor: pointer;
@@ -205,9 +222,19 @@ export const ResponsiveCommentInputWrapper = styled(
   }
 `;
 
-export const EditReplyContainer = styled(CommentBoxContainer)`
-  span {
+export const EditReplyContainer = styled.div`
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  button {
     align-self: flex-end;
+  }
+
+  @media screen and (min-width: 1440px) {
+    width: 111.5%;
   }
 `;
 
